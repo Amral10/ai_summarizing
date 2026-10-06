@@ -4,7 +4,7 @@ import warnings
 from typing import Optional
 
 from docling.document_converter import DocumentConverter
-from dotenv import load_dotenv
+from dotenv import find_dotenv, load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 # Silencia logs e avisos
@@ -13,7 +13,7 @@ logging.getLogger("google_genai").setLevel(logging.ERROR)
 logging.getLogger("langchain_google_genai").setLevel(logging.ERROR)
 logging.getLogger("rapidocr").setLevel(logging.ERROR)
 
-load_dotenv()
+load_dotenv(find_dotenv())
 
 # Instanciados uma única vez no módulo
 converter = DocumentConverter()

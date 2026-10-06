@@ -1,13 +1,15 @@
+from pathlib import Path
+
 from ai_service import ai_request
 
-# Exemplo 1: Processando um PDF local
-resultado_pdf = ai_request("public/relatorio.pdf", "Extraia os 3 pontos principais:")
+# Calcula o caminho da raiz do projeto (uma pasta acima da pasta 'src')
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Monta o caminho exato para o arquivo PDF: hackatthon-tests/public/relatorio.pdf
+caminho_pdf = BASE_DIR / "public" / "relatorio.pdf"
+
+# Executa a requisição
+resultado = ai_request(str(caminho_pdf), "Extraia os pontos principais do relatório:")
+
 print("--- Resumo do PDF ---")
-print(resultado_pdf)
-
-print("\n" + "=" * 40 + "\n")
-
-# Exemplo 2: Processando uma URL
-resultado_url = ai_request("https://mqtt.org", "Resuma o site em uma frase:")
-print("--- Resumo do Site ---")
-print(resultado_url)
+print(resultado)
