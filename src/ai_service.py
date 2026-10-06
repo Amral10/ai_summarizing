@@ -40,7 +40,6 @@ def ai_request(source: str, prompt: str) -> Optional[str]:
         return None
 
 
-# Executado APENAS se você rodar "python3 ai_service.py"
 if __name__ == "__main__":
     print("Testando o módulo localmente...")
     resumo = ai_request("relatorio.pdf", "Resuma este arquivo:")
