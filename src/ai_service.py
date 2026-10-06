@@ -74,7 +74,6 @@ def ai_request_from_url(url: str, prompt: str) -> Optional[str]:
         print(f"Erro: A URL '{url}' é inválida (deve começar com http:// ou https://).")
         return None
 
-    # Passa a string da URL diretamente para o Docling processar
     texto_markdown = text_to_md(url)
 
     if texto_markdown is None:
