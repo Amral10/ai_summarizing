@@ -42,6 +42,7 @@ def text_to_md(source: str) -> Optional[str]:
         print(f"⏳ Processando origem com Docling: {source}...")
         result = converter.convert(source)
         texto_markdown = result.document.export_to_markdown()
+        print(f"✅ Conversão para Markdown concluída. Tamanho do texto: {len(texto_markdown)} caracteres.")
         print("✅ Conversão para Markdown concluída.")
         return texto_markdown
 

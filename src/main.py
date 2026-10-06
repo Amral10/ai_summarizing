@@ -12,7 +12,7 @@ print("--- Resumo do PDF ---")
 print(resultado)
 
 
-url = "https://mqtt.org/"
+url = "https://laravel.com/framework/docs/configuration"
 
 resultado_url = ai_request_from_url(url, "Extraia os pontos principais do conteúdo da URL:")
 
