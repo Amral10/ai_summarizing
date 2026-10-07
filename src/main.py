@@ -1,15 +1,15 @@
 from pathlib import Path
 
-from ai_service import ai_request_from_pdf, ai_request_from_url
+from service.ai_service import ai_request_from_pdf, ai_request_from_url
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+# BASE_DIR = Path(__file__).resolve().parent.parent
 
-caminho_pdf = BASE_DIR / "public" / "relatorio.pdf"
+# caminho_pdf = BASE_DIR / "public" / "relatorio.pdf"
 
-resultado = ai_request_from_pdf(str(caminho_pdf), "Extraia os pontos principais do relatório:")
+# resultado = ai_request_from_pdf(str(caminho_pdf), "Extraia os pontos principais do relatório:")
 
-print("--- Resumo do PDF ---")
-print(resultado)
+# print("--- Resumo do PDF ---")
+# print(resultado)
 
 
 url = "https://laravel.com/framework/docs/configuration"

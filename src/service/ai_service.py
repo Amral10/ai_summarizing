@@ -28,7 +28,7 @@ converter = DocumentConverter(
     }
 )
 
-llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
+llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash")
 
 
 def text_to_md(source: str) -> Optional[str]:
