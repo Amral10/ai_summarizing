@@ -7,6 +7,7 @@ from docling.datamodel.base_models import InputFormat
 from docling.datamodel.pipeline_options import PdfPipelineOptions
 from docling.document_converter import DocumentConverter, PdfFormatOption
 from dotenv import find_dotenv, load_dotenv
+from fastapi import UploadFile
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 # Silencia logs e avisos
@@ -28,7 +29,7 @@ converter = DocumentConverter(
     }
 )
 
-llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash")
+llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 
 
 def text_to_md(source: str) -> Optional[str]:
@@ -83,5 +84,43 @@ def ai_request_from_url(url: str, prompt: str) -> Optional[str]:
     print("🤖 Enviando conteúdo da URL para o Gemini...")
     final_prompt = f"{prompt}\n\nConteúdo extraído da URL:\n{texto_markdown}"
     resposta = llm.invoke(final_prompt)
+
+    return resposta.content
+
+def chat_bot(msg: str) -> Optional[str]:
+    """Função para interagir com o modelo Gemini."""
+    prompt = f"Responda de forma objetiva e clara à mensagem a seguir: {msg}"
+    if not msg:
+        print("Erro: A mensagem de entrada está vazia.")
+        return None
+
+    print("🤖 Enviando mensagem para o Gemini...")
+    resposta = llm.invoke(prompt)
+
+    return resposta.content
+
+def chat_bot_with_file(msg: str, file: UploadFile) -> Optional[str]:
+    """Função para interagir com o modelo Gemini, incluindo análise de um arquivo PDF."""
+    if not msg:
+        print("Erro: A mensagem de entrada está vazia.")
+        return None
+
+    # Salvar o arquivo temporariamente
+    file_path = f"temp_{file.filename}"
+    with open(file_path, "wb") as f:
+        f.write(file.read())
+
+    if not os.path.exists(file_path):
+        print(f"Erro: O arquivo local '{file_path}' não foi encontrado.")
+        return None
+
+    texto_markdown = text_to_md(file_path)
+
+    if texto_markdown is None:
+        return None
+
+    prompt = f"{msg}\n\nConteúdo extraído do arquivo:\n{texto_markdown}"
+    print("🤖 Enviando mensagem e conteúdo do arquivo para o Gemini...")
+    resposta = llm.invoke(prompt)
 
     return resposta.content
